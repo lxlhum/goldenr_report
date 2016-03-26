@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="cj"
+		class="com.forlink.exchange.settlesrv.hstd.SemanticProviderOne4All">
+		<property name="sqlmapstr"
+			value="sel_hstd_settleRpt_queryDeal_T_DEAL_Total" />
+		<property name="title" value="交易商成交日报" />
+		<property name="type" value="_CJ" />
+		<property name="bodyitem">
+			<list>
+				<value>listing_deal</value>
+				<value>spread_deal</value>
+				<value>spreadlisting_deal</value>
+				<value>csgdelaying_deal</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="cjmx"
+		class="com.forlink.exchange.settlesrv.hstd.SemanticProviderOne4All">
+		<property name="sqlmapstr"
+			value="sel_hstd_settleRpt_queryDeal_T_DEAL_F" />
+		<property name="title" value="交易商成交日报清单" />
+		<property name="type" value="_CJMX" />
+		<property name="bodyitem">
+			<list>
+				<value>listing_deal</value>
+				<value>spread_deal</value>
+				<value>spreadlisting_deal</value>
+				<value>csgdelaying_deal</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="kcmx"
+		class="com.forlink.exchange.settlesrv.hstd.SemanticProviderM4M">
+		<property name="title" value="交易商库存交易明细" />
+		<property name="type" value="_KCMX" />
+		<!-- 存货、入库、出库 -->
+		<property name="reportElements">
+			<list>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_hstd_settleRpt_queryInventory_TD_INVENTORY_report" />
+					<property name="bodyitem" value="inventory_item" />
+					<property name="item" value="inventoryitem" />
+					<property name="total" value="inventoryitemtotal" />
+				</bean>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_hstd_settleRpt_queryWarehousein_TD_WAREHOUSEIN" />
+					<property name="bodyitem" value="warehousein_item" />
+					<property name="item" value="warehouseinitem" />
+					<property name="total" value="warehouseintotal" />
+				</bean>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_hstd_settleRpt_queryWarehouseout_TD_WAREHOUSEOUT" />
+					<property name="bodyitem" value="warehouseout_item" />
+					<property name="item" value="warehouseoutitem" />
+					<property name="total" value="warehouseouttotal" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dxhmx"
+		class="com.forlink.exchange.settlesrv.hstd.SemanticProviderM4M">
+		<property name="title" value="交易商已付款待选货明细清单" />
+		<property name="type" value="_DXHMX" />
+		<property name="reportElements">
+			<list>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_hstd_settleRpt_queryPaidCsgOrderF_T_CSG_ORDER_F_report" />
+					<property name="bodyitem" value="csg_order_item" />
+					<property name="item" value="item" />
+					<property name="total" value="total" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jsmx"
+		class="com.forlink.exchange.settlesrv.hstd.SemanticProviderM4M">
+		<property name="title" value="交收申报日报表" />
+		<property name="type" value="_JSMX" />
+		<property name="reportElements">
+			<list>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_csg_orderf_condition_reports_JC_opi" />
+					<property name="bodyitem" value="csg_order_item" />
+					<property name="item" value="item" />
+					<property name="total" value="total" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="fx"
+		class="com.forlink.exchange.settlesrv.hstd.SemanticProviderM4M">
+		<property name="title" value="交易商风控日报表" />
+		<property name="type" value="_FK" />
+		<!-- 交易商资金、货物、担保交易订货、风险度查询 -->
+		<property name="reportElements">
+			<list>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_hstd_settleRpt_queryFund_T_ACCOUNT_INFO" />
+					<property name="bodyitem"
+						value="account_info_check" />
+					<property name="item" value="info_checkitem" />
+					<property name="total" value="total" />
+				</bean>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_hstd_settleRpt_checkInventory_TD_INVENTORY" />
+					<property name="bodyitem"
+						value="inventory_goods_check" />
+					<property name="item" value="goods_checkitem" />
+					<property name="total" value="total" />
+				</bean>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_hstd_settleRpt_querySubsF_T_SUBS_F" />
+					<property name="bodyitem" value="subs_deal_check" />
+					<property name="item" value="deal_checkitem" />
+					<property name="total" value="total" />
+				</bean>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_hstd_settleRpt_queryRisk_T_SUBS_F_report" />
+					<property name="bodyitem" value="goods_risk_check" />
+					<property name="item" value="risk_checkitem" />
+					<property name="total" value="total" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="ndh"
+		class="com.forlink.exchange.settlesrv.hstd.SemanticProviderM4M">
+		<property name="title" value="新订货查询" />
+		<property name="type" value="_NDH" />
+		<!-- 订货、订货明细清单查询 -->
+		<property name="reportElements">
+			<list>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_hstd_querySubsFTotal_T_SUBS_F_DH" />
+					<property name="bodyitem" value="dhbodyitem" />
+					<property name="item" value="dhitem" />
+					<property name="total" value="dhtotal" />
+				</bean>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_hstd_querySubsFTotal_T_SUBS_F_Detail_DHMX" />
+					<property name="bodyitem" value="dhmxbodyitem" />
+					<property name="item" value="dhmxitem" />
+					<property name="total" value="dhmxtotal" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="kx"
+		class="com.forlink.exchange.settlesrv.hstd.SemanticProviderM4M">
+		<property name="title" value="交易商款项清单日报表" />
+		<property name="type" value="_KX" />
+		<!-- 当前交易日期初、上一交易日、货物、当日还款信息、上日还款信息 -->
+		<property name="reportElements">
+			<list>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="HSTD_T_DAILY_FUND_SUMMARY_For_ReportList_currentDailyReport" />
+					<property name="bodyitem" value="cbitem" />
+					<property name="item" value="citem" />
+					<property name="total" value="total" />
+				</bean>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="HSTD_T_DAILY_FUND_SUMMARY_For_ReportList_lastDailyReport" />
+					<property name="bodyitem" value="lbitem" />
+					<property name="item" value="litem" />
+					<property name="total" value="total" />
+				</bean>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_settlesrv_t_repay_currentInfo_groupByAssoNo" />
+					<property name="bodyitem" value="gbitem" />
+					<property name="item" value="gitem" />
+					<property name="total" value="total" />
+				</bean>
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr"
+						value="sel_settlesrv_t_repay_lastInfo_groupByAssoNo" />
+					<property name="bodyitem" value="lgbitem" />
+					<property name="item" value="lgitem" />
+					<property name="total" value="total" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="ykx" 
+	      class= "com.forlink.exchange.settlesrv.hstd.SemanticProviderM4O">
+	      <property name="title" value="交易商款项月报表" />
+	      <!-- 月报表 -->
+		  <property name="type" value="_YKX" />
+		  <property name="reportElements">
+			<list>
+			    <!-- 合计权益 -->
+				<bean class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr" value="HSTD_T_DAILY_FUND_SUMMARY_For_ReportList_currentDailyReport_m"/>
+					<property name="bodyitem" value="mcbitem" />
+					<property name="item" value="mcitem" />
+					<property name="total" value="total" />
+				</bean>
+				<!-- 期末权益 -->
+				<bean class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr" value="HSTD_T_DAILY_FUND_SUMMARY_For_ReportList_ymDailyReport_m"/>
+					<property name="bodyitem" value="ncbitem" />
+					<property name="item" value="ncitem" />
+					<property name="total" value="total" />
+				</bean>
+				<!-- 期初权益 -->
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr" value="HSTD_T_DAILY_FUND_SUMMARY_For_ReportList_lastDailyReport_m" />
+					<property name="bodyitem" value="lmbitem" />
+					<property name="item" value="lmitem" />
+					<property name="total" value="total" />
+				</bean>
+				<!-- 期初静态权益 -->
+				<bean
+					class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr" value="HSTD_T_DAILY_FUND_SUMMARY_lastDailyReport" />
+					<property name="bodyitem" value="lqmbitem" />
+					<property name="item" value="lqmitem" />
+					<property name="total" value="total" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="js" 
+	      class= "com.forlink.exchange.settlesrv.hstd.SemanticProviderM4M">
+	      <property name="title" value="交易商交收日报表" />
+	      <!-- 交收报表（日）  -->
+		  <property name="type" value="_JS" />
+		  <property name="reportElements">
+			<list>
+				<bean class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr" value="sel_InventoryItemMatch_reports_js"/>
+					<property name="bodyitem" value="mcbitem" />
+					<property name="item" value="mcitem" />
+					<property name="total" value="total" />
+				</bean>
+				<bean class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr" value="sel_InventoryItemMatch_reports_jsqd"/>
+					<property name="bodyitem" value="jsqdbitem" />
+					<property name="item" value="jsqditem" />
+					<property name="total" value="jsqdtotal" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="yjs" 
+	      class= "com.forlink.exchange.settlesrv.hstd.SemanticProviderM4O">
+	      <property name="title" value="交易商交收申报月报表" />
+	      <!-- 月交收申报 -->
+		  <property name="type" value="_YJS" />
+		  <property name="reportElements">
+			<list>
+				<bean class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr" value="sel_InventoryItemMatch_reports_js"/>
+					<property name="bodyitem" value="mcbitem" />
+					<property name="item" value="mcitem" />
+					<property name="total" value="total" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="ycrj" 
+	      class= "com.forlink.exchange.settlesrv.hstd.SemanticProviderM4O">
+	      <property name="title" value="交易商入金月报表" />
+	      <!-- 月交收申报 -->
+		  <property name="type" value="_YCRJ" />
+		  <property name="reportElements">
+			<list>
+				<bean class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr" value="sel_T_FUND_INOUT_LOG_CRJ"/>
+					<property name="bodyitem" value="inbitem" />
+					<property name="item" value="initem" />
+					<property name="total" value="total" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<!-- <bean id="yout" 
+	      class= "com.forlink.exchange.settlesrv.hstd.SemanticProviderM4O">
+	      <property name="title" value="交易商出金月报表" />
+	       月交收申报 
+		  <property name="type" value="_YCRJ" />
+		  <property name="reportElements">
+			<list>
+				<bean class="com.forlink.exchange.settlesrv.hstd.HSTDCreateElementImpl">
+					<property name="sqlMapStr" value="sel_T_FUND_INOUT_LOG_OUT"/>
+					<property name="bodyitem" value="outbitem" />
+					<property name="item" value="outitem" />
+					<property name="total" value="total" />
+				</bean>
+			</list>
+		</property>
+	</bean>  -->
+	
+</beans>
